@@ -1,0 +1,22 @@
+{
+  "tau_days": 5.0,
+
+  "yellow_threshold_kg": 1.0,
+  "red_threshold_kg": 2.0,
+  "hysteresis_kg": 0.3,
+
+  "slope_window_days": 30,
+  "slope_yellow_kg_per_week": 0.10,
+  "slope_red_kg_per_week": 0.15,
+
+  "gap_days_vacation": 4,
+  "grace_readings_after_gap": 3,
+
+  "floor_raise_reason_min_chars": 10,
+
+  "weight_min_plausible": 40.0,
+  "weight_max_plausible": 120.0,
+
+  "backup_weekday": 0,
+  "timezone": "Europe/Warsaw"
+}
