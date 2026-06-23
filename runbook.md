@@ -48,7 +48,9 @@ nano .env            # заполнить URL, юзера/пароль бота,
 chmod 600 .env
 
 # 3. Положить базу и инициализировать состояние
-#    (скопируй свой экспорт из приложения в weight.txt)
+#    Свой экспорт из приложения -> weight.txt
+#    (в репо есть weight.txt.example — синтетический, чтобы попробовать без своих данных:
+#     cp weight.txt.example weight.txt)
 cp /path/to/backup.txt weight.txt
 python3 bot.py --cold-start      # прочитает историю, поставит пол = текущая EMA
 

@@ -3,6 +3,7 @@
 
 # Данные пользователя (если DATA_DIR не задан и они лежат рядом)
 weight.txt
+!weight.txt.example
 state.json
 state.json.prev
 state.json.tmp
