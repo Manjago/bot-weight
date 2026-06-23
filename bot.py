@@ -172,6 +172,14 @@ def append_or_update_today(path: str, entry: k.Entry) -> None:
     os.replace(tmp, path)
 
 
+def last_entry(path: str):
+    """Последняя запись в базе (сырой вес + когда). None, если базы/данных нет."""
+    if not os.path.exists(path):
+        return None
+    _, entries = k.read_database(path)
+    return entries[-1] if entries else None
+
+
 def remove_last_today(path: str, today: dt.date) -> bool:
     """Убрать последнюю строку данных за сегодня (для undo). True если убрали."""
     if not os.path.exists(path):
@@ -245,7 +253,13 @@ def handle_message(text: str, paths: dict, cfg: dict, now: dt.datetime) -> list:
         except FileNotFoundError:
             return [("text", "Состояния ещё нет. Сначала пришли число или сделай cold-start.")]
         res = k.compute_zone(s, cfg)
-        return [("text", render_zone(res))]
+        body = render_zone(res)
+        le = last_entry(paths["weight"])
+        if le is not None:
+            when_txt = ("сегодня" if le.when.date() == now.date()
+                        else k.fmt_datetime(le.when).split(",")[0])  # 'дек. 18'
+            body += f"\nпоследняя запись: {k.fmt_weight(le.weight)} ({when_txt})"
+        return [("text", body)]
 
     if cmd == "undo":
         prev = paths["state"] + ".prev"
