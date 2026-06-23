@@ -1,0 +1,24 @@
+[Unit]
+Description=weight-keeper — сторож от отката веса (ntfy)
+# Стартуем после сети: боту нужен доступ к ntfy-серверу
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+
+# Подставь своего пользователя и реальный путь к клону репозитория
+User=kir
+WorkingDirectory=/home/kir/weight-keeper
+ExecStart=/usr/bin/python3 /home/kir/weight-keeper/bot.py
+
+# Падает — поднимаем. Дешёвая VPS перезагрузилась ночью — бот встал сам.
+Restart=always
+RestartSec=5
+
+# Логи демона уходят в journald: journalctl -u weight-keeper -f
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

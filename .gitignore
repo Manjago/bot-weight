@@ -1,0 +1,14 @@
+# Секреты — НИКОГДА в репозиторий
+.env
+
+# Данные пользователя (если DATA_DIR не задан и они лежат рядом)
+weight.txt
+state.json
+state.json.prev
+state.json.tmp
+weight.txt.tmp
+decisions.log
+
+# Python
+__pycache__/
+*.pyc
